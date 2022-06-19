@@ -18,7 +18,15 @@
     <script src="{{ asset('js/plugins/chartjs.min.js') }}" defer></script>
     <script src="{{ asset('js/plugins/Chart.extension.js') }}" defer></script>
     <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.0.2') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+    <script>
+        let limitDecimalPlaces = (e, count) => {
+            if (e.target.value.indexOf('.') == -1) { return; }
+
+            if (e.target.value.length - e.target.value.indexOf('.') > count) {
+                e.target.value = parseFloat(e.target.value).toFixed(count);
+            }
+        }
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

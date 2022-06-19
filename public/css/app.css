@@ -17025,3 +17025,11 @@ textarea.form-control-lg {
 .w-41 {
   width: 41.66666667%;
 }
+
+.modal-content {
+  width: 45rem !important;
+  left: -5rem !important;
+}
+.modal-content .modal-body {
+  width: 45rem;
+}

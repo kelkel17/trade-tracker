@@ -1,5 +1,6 @@
 
 @include('components.trade.create')
+@include('components.trade.update')
 <div class="card mb-4">
     <div class="card-header pb-0 text-center">
         <h6>Trades</h6>

@@ -78,86 +78,118 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="card-body">
-                    <form>
+            <form method="POST" action="{{ route('trades.store') }}">
+            @csrf
+                <div class="modal-body">
+                    <div class="card-body">
+                            <!-- Date & Time -->
+                        <h6 class="heading-small text-muted mb-4">Trade Date & Time</h6>
                         <div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-username">Username</label>
-                                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
+                                        <label class="form-control-label" for="trade_date">Trade Date</label>
+                                        <input
+                                            class="form-control datepicker  @error('trade_date') is-invalid @enderror"
+                                            name="trade_date"
+                                            type="text"
+                                            onfocus="focused(this)"
+                                            onfocusout="defocused(this)"
+                                        >
+                                        @error('trade_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-email">Email address</label>
-                                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                                        <label class="form-control-label" for="opening_time">Opening Time</label>
+                                        <input
+                                            class="form-control timepicker opening-time @error('opening_time') is-invalid @enderror"
+                                            id="opening-time"
+                                            name="opening_time"
+                                            type="text"
+                                            onfocus="focused(this)"
+                                            onfocusout="defocused(this)"
+                                        >
+                                        @error('opening_time')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-first-name">First name</label>
-                                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-last-name">Last name</label>
-                                        <input type="text" id="input-last-name" class="form-control" placeholder="Last name" value="Jesse">
+                                        <label class="form-control-label" for="closing_time">Closing Time</label>
+                                        <input
+                                            class="form-control timepicker closing-time @error('closing_time') is-invalid @enderror"
+                                            id="closing-time"
+                                            name="closing_time"
+                                            type="text"
+                                            onfocus="focused(this)"
+                                            onfocusout="defocused(this)"
+                                            disabled="true"
+                                        >
+                                        @error('closing_time')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="horizontal dark my-4">
-                        <!-- Address -->
+                        <!-- Direction/Pair/Flag -->
+                        <h6 class="heading-small text-muted mb-4">Direction/Pair/Flag</h6>
                         <div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-address">Address</label>
-                                        <input id="input-address" class="form-control" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                                        <label class="form-control-label" for="direction">Direction</label>
+                                        <select class="form-control  @error('direction') is-invalid @enderror" name="direction">
+                                            <option>Buy</option>
+                                            <option>Sell</option>
+                                        </select>
+                                        @error('direction')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="input-city">City</label>
-                                        <input type="text" id="input-city" class="form-control" placeholder="City" value="New York">
+                                        <label class="form-control-label" for="pair">Pair</label>
+                                        <select class="form-control @error('pair') is-invalid @enderror" name="pair" >
+                                            <option>EURUSD</option>
+                                            <option>AUDNZD</option>
+                                            <option>AUDCHF</option>
+                                        </select>
+                                        @error('pair')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-country">Country</label>
-                                        <input type="text" id="input-country" class="form-control" placeholder="Country" value="United States">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="input-country">Postal code</label>
-                                        <input type="number" id="input-postal-code" class="form-control" placeholder="Postal code">
+                                <div class="col-md-4 d-flex">
+                                    <div class="form-group form-check form-switch mt-auto">
+                                        <input class="form-check-input" id="is-normal-trade" type="checkbox" name="is_normal_trade" checked="true">
+                                        <label class="form-check-label" for="is_normal_trade">Is normal trade?</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="horizontal dark my-4">
-                        <!-- Description -->
-                        <div>
-                            <div class="form-group">
-                                <label class="form-control-label">About Me</label>
-                                <textarea rows="4" class="form-control" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 5.</textarea>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark">Save Trade</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Save Trade</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

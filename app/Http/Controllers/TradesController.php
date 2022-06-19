@@ -37,22 +37,24 @@ class TradesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'trade_date' => 'required',
-            'opening_time' => 'required',
-            'closing_time' => 'required'
+            'trade_date' => ['required'],
+            'opening_time' => ['required'],
+            'closing_time' => ['required'],
+            'direction' => ['required'],
+            'operation' => ['required'],
         ]);
 
-        $trade = new Trade;
-        $tade->trade_date = $request->trade_date;
-        $tade->direction = $request->direction;
-        $tade->opening_time = $request->opening_time;
-        $tade->closing_time = $request->closing_time;
-        $tade->is_normal_trade = $request->is_normal_trade;
-        $tade->pair = $request->pair;
-        $trade->user_id = Auth::user()->id;
+        Trade::create([
+            'trade_date' => $request->trade_date,
+            'direction' => $request->direction,
+            'opening_time' => $request->opening_time,
+            'closing_time' => $request->closing_time,
+            'is_normal_trade' => $request->is_normal_trade == 'on' ? true : false,
+            'pair' => $request->pair,
+            'user_id' => Auth::user()->id
+        ]);
 
-        return redirect()->route('home')
-                         ->with('success','Company has been created successfully.');
+        return redirect('home');
     }
 
     /**
